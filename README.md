@@ -12,6 +12,8 @@
 
 
 ## 4、启动服务端和客户端验证
+> go get 
+> 
 > go run server.go
 > 
 > go run client.go
