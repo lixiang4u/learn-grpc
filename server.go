@@ -1,23 +1,12 @@
 package main
 
 import (
-	"context"
 	"github.com/lixiang4u/learn-grpc/rpc/greeter"
+	"github.com/lixiang4u/learn-grpc/service"
 	"google.golang.org/grpc"
 	"log"
 	"net"
 )
-
-type server struct {
-	greeter.UnimplementedHelloServiceServer
-}
-
-func (server) SayHello(ctx context.Context, req *greeter.HelloRequest) (*greeter.HelloResponse, error) {
-	log.Println("[request]", req.Greeting)
-	var resp = greeter.HelloResponse{}
-	resp.Reply = "hello " + req.Greeting
-	return &resp, nil
-}
 
 func main() {
 
@@ -28,7 +17,8 @@ func main() {
 	}
 
 	var s = grpc.NewServer()
-	greeter.RegisterHelloServiceServer(s, &server{})
+	greeter.RegisterHelloServiceServer(s, &service.HelloService{})
+	greeter.RegisterGreetingServiceServer(s, &service.GreetingService{})
 	if err := s.Serve(listen); err != nil {
 		log.Println("[s.Serve]", err.Error())
 	}
