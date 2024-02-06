@@ -20,6 +20,7 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
 
+	// 创建对应rpc服务客户端，并调用rpc方法
 	var greetingClient = greeter.NewGreetingServiceClient(conn)
 	resp, err := greetingClient.SayHelloAgain(ctx, &greeter.HelloRequest{Greeting: time.Now().Format("2006-01-02 15:04:05")})
 	if err != nil {
@@ -29,6 +30,7 @@ func main() {
 	log.Println("[greetingClient.resp]", resp.Reply)
 	log.Println("[greetingClient.resp]", resp.String())
 
+	// 同上
 	var helloClient = greeter.NewHelloServiceClient(conn)
 	resp, err = helloClient.SayHello(ctx, &greeter.HelloRequest{Greeting: time.Now().Format("2006-01-02 15:04:05")})
 	if err != nil {

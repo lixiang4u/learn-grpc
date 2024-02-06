@@ -17,6 +17,7 @@ func main() {
 	}
 
 	var s = grpc.NewServer()
+	//  实现rpc接口定义并注册到rpc服务
 	greeter.RegisterHelloServiceServer(s, &service.HelloService{})
 	greeter.RegisterGreetingServiceServer(s, &service.GreetingService{})
 	if err := s.Serve(listen); err != nil {
