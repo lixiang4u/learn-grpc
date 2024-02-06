@@ -1,4 +1,4 @@
-module learn-grpc
+module github.com/lixiang4u/learn-grpc
 
 go 1.21.3
 
